@@ -96,6 +96,9 @@ let halleImage;
 let animationDetails = {};
 
 var collectableList = {
+  hardWheel: {image: "images/collectables/hard-wheel.png"},
+  mediumWheel: { image: "images/collectables/medium-wheel.png"},
+  softWheel: { image: "images/collectables/soft-wheel.png"},
   database: { image: "images/collectables/database.png" },
   diamond: { image: "images/collectables/diamond-head.png" },
   grace: { image: "images/collectables/grace-head.png" },
