@@ -44,12 +44,12 @@ $(function () {
     // TODO 3 - Create Collectables
     createCollectable("softWheel", 1005, 545);
     createCollectable("mediumWheel", 715, 50);
-    createCollectable("hardWheel", 1000, 185);
+    createCollectable("hardWheel", 950, 185);
 
     
     // TODO 4 - Create Cannons
     createCannon("top", 1082, 1100);
-    createCannon("left", 200, 800);
+    createCannon("left", 200, 1005);
     createCannon("left", 650, 1100);
 
     
