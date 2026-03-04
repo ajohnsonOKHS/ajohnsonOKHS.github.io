@@ -6,9 +6,10 @@
     <script src="jquery.min.js"></script>
     <style>
       .box {
-        width: 70px;
-        height: 70px;
-        background-color: teal;
+        width: 220px;
+        height: 50px;
+        background-image: url("2025williamscarright.avif");
+        background-size: 225px;
         font-size: 300%;
         text-align: center;
         user-select: none;
@@ -58,6 +59,7 @@
         // moves the Box to a new position on the screen along the X-Axis
         function moveBoxTo(newPositionX) {
           box.css("left", newPositionX);
+          
         }
 
         // changes the text displayed on the Box
@@ -73,10 +75,8 @@
         var positionX = 0;
         var points = 0;
         var speed = 10;
+    
       
-      
-
-
         /**
          * This Function will be called 20 times/second.
          * Each time it is called, it should move the Box to a new location.
