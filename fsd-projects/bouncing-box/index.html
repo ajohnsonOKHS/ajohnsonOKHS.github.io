@@ -129,6 +129,7 @@
           points += 1; // user clicks box - number goes up by 1
           changeBoxText(points); //what is shown in box
           speed = 3 * points + 10;
+          speedY = 3 * points + 10;
           misClick -= 1; //counts number of mis-clicks
           var randNum = Math.random() * boardWidth;
           var randNumY = Math.random() * boardHeight;
