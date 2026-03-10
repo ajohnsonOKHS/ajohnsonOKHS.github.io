@@ -12,6 +12,7 @@
         background-size: 225px;
         font-size: 300%;
         text-align: center;
+        text-emphasis: open;
         user-select: none;
         display: block;
         position: absolute;
@@ -90,7 +91,6 @@
           if (misClick === 10) {
             endGame();
           }
-        
         }
       
         /**
@@ -126,9 +126,9 @@
          * - move the box to the left side of the screen.
          */
         function handleBoxClick() {
+          points += 1; // user clicks box - number goes up by 1
           changeBoxText(points); //what is shown in box
           speed = 3 * points + 10;
-          points++; // user clicks box - number goes up by 1
           misClick -= 1; //counts number of mis-clicks
           var randNum = Math.random() * boardWidth;
           var randNumY = Math.random() * boardHeight;
