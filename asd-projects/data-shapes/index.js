@@ -41,9 +41,19 @@ $(document).ready(function () {
     repeat: 3
   };
   dataShapes.push(shape)
-// TODO 0 complete
+  // TODO 0 complete
   // TODO 2: add a new property to all data shapes
-  
+  for(var i = 0; i < dataShapes.length; i++) {
+    var currentShape = dataShapes[i];
+    if (currentShape.color === "red") {
+      dataShapes[i].goodBehavior = "bounce";
+    } else if (currentShape.color === "blue") {
+      dataShapes[i].goodBehavior = "blink";
+    } else {
+      dataShapes[i].goodBehavior = "spin";
+    }
+  }
+      
 
   // TODO 3-a: add a function that handles the static display type
   
@@ -58,6 +68,7 @@ $(document).ready(function () {
   // BUTTON HANDLERS BELOW HERE (3-b, 4-b, 5-b) ///
   /////////////////////////////////////////////////
 
+  //
   function staticDisplay() {
     // TODO 3-b: call your handleStatic function
     
