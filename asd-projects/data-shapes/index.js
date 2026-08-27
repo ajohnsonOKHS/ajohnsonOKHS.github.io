@@ -40,17 +40,17 @@ $(document).ready(function () {
     shape: "circle",
     repeat: 3
   };
-  dataShapes.push(shape)
+  dataShapes.push(shape);
   // TODO 0 complete
   // TODO 2: add a new property to all data shapes
   for(var i = 0; i < dataShapes.length; i++) {
     var currentShape = dataShapes[i];
     if (currentShape.color === "red") {
-      dataShapes[i].goodBehavior = "bounce";
+      currentShape.goodBehavior = "bounce";
     } else if (currentShape.color === "blue") {
-      dataShapes[i].goodBehavior = "blink";
+      currentShape.goodBehavior = "blink";
     } else {
-      dataShapes[i].goodBehavior = "spin";
+      currentShape.goodBehavior = "spin";
     }
   }
       
@@ -63,7 +63,7 @@ $(document).ready(function () {
 
   // TODO 4-a: add a function that handles the good display type
   function handleGood(color, shape, repeat) {
-    setBackgroundWithSimple(color, shape, repeat)
+    setBackgroundWithSimple(color, shape, repeat);
     animationDetails.displayType = 2;
   }
 
@@ -90,20 +90,20 @@ $(document).ready(function () {
   //
   function staticDisplay() {
     // TODO 3-b: call your handleStatic function
-    handleStatic(dataShapes[currentIndex])
+    handleStatic(dataShapes[currentIndex]);
   }
 
   function goodDisplay() {
     // TODO 4-b: call your handleGood function
     var currentShape = dataShapes[currentIndex];
-    handleGood(currentShape[i])
+    handleGood(currentShape.color, currentShape.shape, currentShape.repeat);
   }
 
   function badDisplay() {
     // TODO 5-b: call your handleBad function
     var currentShape = dataShapes[currentIndex];
     var repeat = currentShape.repeat;
-    handleBad(currentShape, repeat)
+    handleBad(currentShape, repeat);
   }
 
   /////////////////////////////////////////////////
