@@ -45,7 +45,7 @@ function makeGhost(id) {
   var ghost = {};
 
   // this creates some useful variables that are not directly placed in the object
-  var maxX = boardWidth - ghostRadius * 2;
+  var maXX = boardWidth - ghostRadius * 2;
   var maxY = boardHeight - ghostRadius * 2;
 
   // this gives the ghost object all of the data that it needs to store
@@ -53,7 +53,7 @@ function makeGhost(id) {
   ghost.x = Math.random() * maXX + ghostRadius;
   ghost.y = Math.random() * maxY + ghostRadius;
   ghost.speedX = decideSpeed();
-  ghost.speedY = desideSpeed();
+  ghost.speedY = decideSpeed();
 
   // assign a random color for the ghost's glow
   const colors = [
@@ -80,18 +80,18 @@ function decideSpeed() {
 
 // this generates an id for a ghost given the ghost's number
 function getId(number) {
-  return "ghost" + number; ()
+  return "ghost" + number; 
 }
 
 // this adds a ghost into the HTML
-funtion addNewGhostElement(ghost, id) {
+function addNewGhostElement(ghost, id) {
   // this creates the HTML for a new ghost element
   var $ghost = $("<img>")
     .attr("id", id)
     .attr("src", "img/ghost.png")
     .css("left", ghost.x)
     .css("top", ghost.y)
-    .addClass("ghost");
+    .addClass("ghost")
 
   // this inserts the ghost's HTML into your website
   $ghost.appendTo($board);
@@ -102,12 +102,12 @@ funtion addNewGhostElement(ghost, id) {
 //////////////////
 
 // this should move all of the ghosts
-function update) {
+function update() {
   // loop over the ghosts array. We use the maxGhosts variable instead of ghosts.length
   // to make seeing issues in the debugger slightly easier (in practice, you should use
   // ghosts.length, but do NOT change it here)
   for (var i = 0; i < maxGhosts; i++) {
-    var ghost = ghosts[j];
+    var ghost = ghosts[i];
 
     // move the ghost
     moveGhost(ghost);
@@ -136,7 +136,7 @@ function moveGhost(ghost) {
 // this bounces ghosts if they hit a wall
 function bounceGhost(ghost) {
   // this bounces off the left wall
-  if (ghost.x < 0{
+  if (ghost.x < 0) {
     ghost.x -= ghost.speedX;
     ghost.speedX *= -1;
   }
