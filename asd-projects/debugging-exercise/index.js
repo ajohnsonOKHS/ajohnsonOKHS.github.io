@@ -107,7 +107,7 @@ function update() {
   // to make seeing issues in the debugger slightly easier (in practice, you should use
   // ghosts.length, but do NOT change it here)
   for (var i = 0; i < maxGhosts; i++) {
-    var ghost = ghosts[i];
+    ghost = ghosts[i];
 
     // move the ghost
     moveGhost(ghost);
@@ -159,7 +159,7 @@ function bounceGhost(ghost) {
 
 // this redraws the ghost's position on the screen
 function updateGhostOnScreen(ghost) {
-  maxGhosts = 1;
+  maxGhosts = 10;
 
   // these lines redraw the ghost's position
   $(ghost.id).css("left", ghost.x);
