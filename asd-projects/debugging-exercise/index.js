@@ -25,7 +25,6 @@ $(document).ready(function () {
     var newId = getId(i);
     var newGhost = makeGhost(newId);
     ghosts.push(newGhost);
-
     addNewGhostElement(newGhost, newId);
   }
 
@@ -44,7 +43,7 @@ $(document).ready(function () {
     var ghost = {};
 
     // this creates some useful variables that are not directly placed in the object
-    var maXX = boardWidth - ghostRadius * 2;
+    var maxX = boardWidth - ghostRadius * 2;
     var maxY = boardHeight - ghostRadius * 2;
 
     // this gives the ghost object all of the data that it needs to store
