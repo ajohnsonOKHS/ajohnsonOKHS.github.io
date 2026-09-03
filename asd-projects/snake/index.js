@@ -75,7 +75,7 @@ function update() {
     moveSnake();
   }
 
-  if (hasHitWall() === hasCollidedWithSnake()) {
+  if (hasHitWall() || hasCollidedWithSnake()) {
     endGame();
   }
 
@@ -83,6 +83,9 @@ function update() {
     handleAppleCollision();
   }
 }
+  
+ 
+
 
 function checkForNewDirection(event) {
   /* 
