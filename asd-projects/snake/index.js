@@ -58,7 +58,7 @@ function init() {
   makeApple()
 
   // TODO 6, Part 1: Initialize the interval
-
+  updateInterval = setInterval(update, 100);
 
 }
 
@@ -72,9 +72,17 @@ function init() {
  */
 function update() {
   // TODO 6, Part 2: Fill in the update function's code block
+  if (started) {
+    moveSnake();
+  } 
 
+  if (hasHitWall() === hasCollidedWithSnake()) {
+    endGame();
+  }
 
-
+  if (hasCollidedWithApple()) {
+    handleAppleCollision();
+  }
 
 }
 
