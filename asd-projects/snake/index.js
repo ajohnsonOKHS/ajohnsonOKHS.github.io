@@ -119,7 +119,13 @@ function moveSnake() {
     stored in the Array snake.body and each part knows its current 
     column/row properties. 
   */
+  for (var i = 0; i > snake.body.length - 1; i--) {
+    var currentSnakeSquare = snake.body[i];
+    var snakeSquareInFront = snake.body;
 
+    moveBodyAToBodyB(currentSnakeSquare, snakeSquareInFront);
+    repositionSquare(currentSnakeSquare);
+  }
   //Before moving the head, check for a new direction from the keyboard input
   checkForNewDirection();
 

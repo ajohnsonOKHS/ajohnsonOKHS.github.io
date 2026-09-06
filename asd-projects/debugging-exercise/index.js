@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     // this gives the ghost object all of the data that it needs to store
     ghost.id = "#" + id;
-    ghost.x = Math.random() * maXX + ghostRadius;
+    ghost.x = Math.random() * maxX + ghostRadius;
     ghost.y = Math.random() * maxY + ghostRadius;
     ghost.speedX = decideSpeed();
     ghost.speedY = decideSpeed();
@@ -105,7 +105,7 @@ $(document).ready(function () {
     // to make seeing issues in the debugger slightly easier (in practice, you should use
     // ghosts.length, but do NOT change it here)
     for (var i = 0; i < maxGhosts; i++) {
-      ghost = ghosts[i];
+      var ghost = ghosts[i];
 
       // move the ghost
       moveGhost(ghost);
@@ -157,7 +157,6 @@ $(document).ready(function () {
 
   // this redraws the ghost's position on the screen
   function updateGhostOnScreen(ghost) {
-    maxGhosts = 10;
 
     // these lines redraw the ghost's position
     $(ghost.id).css("left", ghost.x);
@@ -228,7 +227,7 @@ $(document).ready(function () {
     var countdownSeconds = initialDelay / 1000;
     $countdown.text("Starting in: " + countdownSeconds);
 
-    var countdownInterval = setInterval(function () {
+    var countdownInterval = setInterval (function() {
       countdownSeconds--;
       if (countdownSeconds > 0) {
         $countdown.text("Starting in: " + countdownSeconds);
