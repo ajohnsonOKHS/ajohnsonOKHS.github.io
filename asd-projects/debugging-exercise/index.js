@@ -13,7 +13,7 @@ $(document).ready(function () {
   var ghostRadius = 10;
   // modify these values if you want faster moving ghosts or a shorter countdown timer
   const FPS = 25;
-  const initialDelay = 5_000;
+  const initialDelay = 5000;
 
   //////////
   // startup
