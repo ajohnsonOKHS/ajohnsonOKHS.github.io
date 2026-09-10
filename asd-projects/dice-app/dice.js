@@ -18,4 +18,4 @@ function handleClick() {
   rollDie("#die");
 }
 
-handleClick();
+$("#die").on("click", handleClick);
