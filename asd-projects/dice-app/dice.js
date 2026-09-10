@@ -11,7 +11,8 @@ $(document).ready(function () {
 });
 
 function rollDie(dieID) {
-  console.log("clicked");
+  var randomNum = Math.ceil(Math.random() * 6);
+  console.log(randomNum);
 }
 
 function handleClick() {
