@@ -45,6 +45,13 @@ function rollDie(dieID) {
     makeDot(25, 25, dieID);
     makeDot(25, 75, dieID);
     makeDot(75, 25, dieID);
+  } else if (randomNum === 6) {
+    makeDot(25, 75, dieID);
+    makeDot(50, 75, dieID);
+    makeDot(75, 75, dieID);
+    makeDot(25, 25, dieID);
+    makeDot(50, 25, dieID);
+    makeDot(75, 25, dieID);
   }
 }
 
