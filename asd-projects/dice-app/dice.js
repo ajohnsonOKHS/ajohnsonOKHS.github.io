@@ -9,3 +9,13 @@ $(document).ready(function () {
   .css("left", 50)
   .appendTo("#die");
 });
+
+function rollDie(dieID) {
+  console.log("clicked");
+}
+
+function handleClick() {
+  rollDie("#die");
+}
+
+handleClick();
