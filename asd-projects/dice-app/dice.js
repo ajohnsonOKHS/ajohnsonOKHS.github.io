@@ -10,6 +10,17 @@ $(document).ready(function () {
     .appendTo("#die");
 });
 
+$(document).ready(function () {
+  $("<div2>")
+    .css("height", 15)
+    .css("width", 15)
+    .css("background-color", "teal")
+    .css("position", "absolute")
+    .css("top", 50)
+    .css("left", 50)
+    .appendTo("#secondDie"); 
+});
+
 function makeDot(top, left, dieID) {
   $("<div>")
     .css("height", 15)
@@ -59,4 +70,9 @@ function handleClick() {
   rollDie("#die");
 }
 
+function handleClick2() {
+  rollDie("#secondDie");
+}
+
 $("#die").on("click", handleClick);
+$("#secondDie").on("click", handleClick2);

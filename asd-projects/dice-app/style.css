@@ -1,6 +1,13 @@
 #die {
     height: 100px;
     width: 100px;
-    background-color: lightgray;
+    background-color: whitesmoke;
+    position: relative;
+}
+
+#secondDie {
+    height: 100px;
+    width: 100px;
+    background-color: pink;
     position: relative;
 }
