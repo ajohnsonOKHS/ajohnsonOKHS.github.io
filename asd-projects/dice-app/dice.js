@@ -10,6 +10,17 @@ $(document).ready(function () {
   .appendTo("#die");
 });
 
+function makeDot(top, left, dieID) {
+  $("<div>")
+  .css("height", 15)
+  .css("width", 15)
+  .css("background-color", "black")
+  .css("position", "absolute")
+  .css("top", top)
+  .css("left", left)
+  .appendTo(dieID);
+}
+
 function rollDie(dieID) {
   var randomNum = Math.ceil(Math.random() * 6);
   console.log(randomNum);
