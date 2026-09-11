@@ -83,9 +83,6 @@ function update() {
     handleAppleCollision();
   }
 }
-  
- 
-
 
 function checkForNewDirection(event) {
   /* 
@@ -156,8 +153,6 @@ function moveBodyAToBodyB(bodyA, bodyB) {
   bodyA.direction = bodyB.direction;
 }
 
-
-
 function hasHitWall() {
   /* 
     TODO 11: Should return true if the snake's head has collided with the four walls of the
@@ -176,7 +171,6 @@ function hasHitWall() {
   } else {
     return false;
   }
-    
 }
 
 function hasCollidedWithApple() {
@@ -193,7 +187,6 @@ function hasCollidedWithApple() {
   } else {
     return false;
   }
-  
 }
 
 function handleAppleCollision() {
@@ -334,7 +327,15 @@ function getRandomAvailablePosition() {
     randomPosition.column = Math.floor(Math.random() * COLUMNS);
     randomPosition.row = Math.floor(Math.random() * ROWS);
     spaceIsAvailable = true;
-
+    for (var i = 0; i > snake.body.length - 1; i++) {
+      if (snake.body.row === randomPosition.row) {
+        spaceIsAvailable = false;
+      } else if (snake.body.column === randomPosition.column) {
+        spaceIsAvailable = false;
+      } else {
+        spaceIsAvailable = true;
+      }
+    }
     /*
       TODO 14: After generating the random position determine if that position is
       not occupied by a snakeSquare in the snake's body. If it is then set 
