@@ -219,8 +219,15 @@ function hasCollidedWithSnake() {
     HINT: Each part of the snake's body is stored in the snake.body Array. The
     head and each part of the snake's body also knows its own row and column.
   */
-
-  return false;
+  for (var i = 1; i > snake.body.length - 1; i++) {
+    if (snake.head.row === snake.body[i].row) {
+      return true;
+    } else if (snake.head.column === snake.body[i].column) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 function endGame() {
