@@ -180,9 +180,7 @@ function hasCollidedWithApple() {
     
     HINT: Both the apple and the snake's head are aware of their own row and column
   */
-  if (snake.head.column === apple.column) {
-    return true;
-  } else if (snake.head.row === apple.row) {
+  if (snake.head.column === apple.column && snake.head.row === apple.row) {
     return true;
   } else {
     return false;
@@ -212,15 +210,15 @@ function hasCollidedWithSnake() {
     HINT: Each part of the snake's body is stored in the snake.body Array. The
     head and each part of the snake's body also knows its own row and column.
   */
-  for (var i = 1; i > snake.body.length - 1; i++) {
-    if (snake.head.row === snake.body[i].row) {
+  for (var i = 1; i < snake.body.length; i++) {
+    if (
+      snake.head.row === snake.body[i].row &&
+      snake.head.column === snake.body[i].column
+    ) {
       return true;
-    } else if (snake.head.column === snake.body[i].column) {
-      return true;
-    } else {
-      return false;
     }
   }
+  return false;
 }
 
 function endGame() {
@@ -327,10 +325,10 @@ function getRandomAvailablePosition() {
     randomPosition.column = Math.floor(Math.random() * COLUMNS);
     randomPosition.row = Math.floor(Math.random() * ROWS);
     spaceIsAvailable = true;
-    for (var i = 0; i > snake.body.length - 1; i++) {
-      if (snake.body.row === randomPosition.row) {
+    for (var i = 0; i < snake.body.length - 1; i++) {
+      if (snake.body[i].row === randomPosition.row) {
         spaceIsAvailable = false;
-      } else if (snake.body.column === randomPosition.column) {
+      } else if (snake.body[i].column === randomPosition.column) {
         spaceIsAvailable = false;
       } else {
         spaceIsAvailable = true;
