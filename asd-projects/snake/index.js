@@ -211,10 +211,7 @@ function hasCollidedWithSnake() {
     head and each part of the snake's body also knows its own row and column.
   */
   for (var i = 1; i < snake.body.length; i++) {
-    if (
-      snake.head.row === snake.body[i].row &&
-      snake.head.column === snake.body[i].column
-    ) {
+    if (snake.head.row === snake.body[i].row && snake.head.column === snake.body[i].column) {
       return true;
     }
   }
@@ -326,11 +323,10 @@ function getRandomAvailablePosition() {
     randomPosition.row = Math.floor(Math.random() * ROWS);
     spaceIsAvailable = true;
     for (var i = 0; i < snake.body.length - 1; i++) {
-      if (snake.body[i].row === randomPosition.row) {
+      if (snake.body[i].row === randomPosition.row && snake.body[i].column === randomPosition.column) {
         spaceIsAvailable = false;
-      } else if (snake.body[i].column === randomPosition.column) {
-        spaceIsAvailable = false;
-      } else {
+      } 
+      else {
         spaceIsAvailable = true;
       }
     }
