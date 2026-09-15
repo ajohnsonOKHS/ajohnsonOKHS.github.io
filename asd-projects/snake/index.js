@@ -244,10 +244,17 @@ function endGame() {
  */
 function makeApple() {
   // TODO 4, Part 2: Fill in this function's code block
+  // make the apple jQuery Object and append it to the board
   apple.element = $("<div>").addClass("apple").appendTo(board);
+
+  // get a random available row/column on the board
   var randomPosition = getRandomAvailablePosition();
+
+  // initialize the row/column properties on the Apple Object
   apple.row = randomPosition.row;
   apple.column = randomPosition.column;
+
+  // position the apple on the screen
   repositionSquare(apple);
 }
 
@@ -257,14 +264,25 @@ function makeApple() {
  */
 function makeSnakeSquare(row, column) {
   // TODO 5, Part 2: Fill in this function's code block
+  // initialize a new snakeSquare Object
   const snakeSquare = {};
+
+  // make the snakeSquare element and add it to the board
   snakeSquare.element = $("<div>").addClass("snake").appendTo(board);
+
+  // assign the row and column position
   snakeSquare.row = row;
   snakeSquare.column = column;
+
+  // set the snake’s position visually
   repositionSquare(snakeSquare);
+
+  // if this is the head, give it a unique ID
   if (snake.body.length === 0) {
     snakeSquare.element.attr("id", "snake-head");
   }
+
+  // add the square to the snake’s body and update the tail
   snake.body.push(snakeSquare);
   snake.tail = snakeSquare;
 }
