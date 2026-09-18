@@ -161,11 +161,11 @@ function hasHitWall() {
     HINT: What will the row and column of the snake's head be if this were the case?
   */
   if (snake.head.row > ROWS || snake.head.row < 0) {
-  return true;
-} else if (snake.head.column > COLUMNS || snake.head.column < 0) {
-  return true;
-}
-return false;
+      return true;
+  } else if (snake.head.column > COLUMNS || snake.head.column < 0) {
+      return true;
+  }
+  return false;
 }
 
 function hasCollidedWithApple() {

@@ -11,6 +11,10 @@ $(document).ready(function () {
   var boardHeight = $($board).height();
   var ghosts = [];
   var ghostRadius = 10;
+  var ghostWidth = $(".ghost").css("width");
+  var ghostHeight = $(".ghost").css("height");
+  let integerWidth = parseInt(ghostWidth, 10);
+  let integerHeight = parseInt(ghostHeight, 10);
   // modify these values if you want faster moving ghosts or a shorter countdown timer
   const FPS = 25;
   const initialDelay = 5000;
@@ -50,6 +54,8 @@ $(document).ready(function () {
     ghost.id = "#" + id;
     ghost.x = Math.random() * maxX + ghostRadius;
     ghost.y = Math.random() * maxY + ghostRadius;
+    ghost.rightX = ghost.x + integerWidth;
+    ghost.bottomY = ghost.y + integerHeight;
     ghost.speedX = decideSpeed();
     ghost.speedY = decideSpeed();
 
@@ -129,38 +135,35 @@ $(document).ready(function () {
   function moveGhost(ghost) {
     ghost.x += ghost.speedX;
     ghost.y += ghost.speedY;
+    ghost.rightX -= ghost.speedX;
+    ghost.bottomY -= ghost.speedY;
   }
 
   // this bounces ghosts if they hit a wall
   function bounceGhost(ghost) {
     // this bounces off the left wall
-    if (ghost.x < 0) {
+    if (ghost.x < 0 || ghost.rightX >= boardWidth) {
       ghost.x -= ghost.speedX;
       ghost.speedX *= -1;
-    }
-    // this bounces off the right wall
-    else if (ghost.x > boardWidth) {
-      ghost.x -= ghost.speedX;
-      ghost.speedX *= -1;
+      ghost.rightX += ghost.speedX;
+      ghost.speedX *= 1;
     }
     // this bounces off the top wall
-    if (ghost.y < 0) {
+    if (ghost.y < 0 || ghost.bottomY >= boardHeight) {
       ghost.y -= ghost.speedY;
       ghost.speedY *= -1;
-    }
-    // this bounces off the bottom wall
-    else if (ghost.y > boardHeight) {
-      ghost.y -= ghost.speedY;
-      ghost.speedY *= -1;
+      ghost.bottomY += ghost.speedY;
+      ghost.speedY *= 1;
     }
   }
 
   // this redraws the ghost's position on the screen
   function updateGhostOnScreen(ghost) {
-
     // these lines redraw the ghost's position
     $(ghost.id).css("left", ghost.x);
     $(ghost.id).css("top", ghost.y);
+    $(ghost.id).css("right", ghost.rightX);
+    $(ghost.id).css("bottom", ghost.bottomY);
 
     // these lines add a glow around the ghost
     $(ghost.id).css(
@@ -227,7 +230,7 @@ $(document).ready(function () {
     var countdownSeconds = initialDelay / 1000;
     $countdown.text("Starting in: " + countdownSeconds);
 
-    var countdownInterval = setInterval (function() {
+    var countdownInterval = setInterval(function () {
       countdownSeconds--;
       if (countdownSeconds > 0) {
         $countdown.text("Starting in: " + countdownSeconds);
