@@ -5,8 +5,8 @@ $(document).ready(function () {
     .css("width", 15)
     .css("background-color", "black")
     .css("position", "absolute")
-    .css("top", 50)
-    .css("left", 50)
+    .css("top", 40)
+    .css("left", 40)
     .appendTo("#die");
 
   $("<div2>")
@@ -14,8 +14,8 @@ $(document).ready(function () {
     .css("width", 15)
     .css("background-color", "teal")
     .css("position", "absolute")
-    .css("top", 50)
-    .css("left", 50)
+    .css("top", 40)
+    .css("left", 40)
     .appendTo("#secondDie");
 
   function makeDot(top, left, elementID) {
@@ -34,32 +34,32 @@ $(document).ready(function () {
     var randomNum = Math.ceil(Math.random() * 6);
     //console.log(randomNum);
     if (randomNum === 1) {
-      makeDot(50, 50, elementID);
+      makeDot(40, 40, elementID);
     } else if (randomNum === 2) {
-      makeDot(25, 25, elementID);
-      makeDot(75, 75, elementID);
+      makeDot(15, 15, elementID);
+      makeDot(65, 65, elementID);
     } else if (randomNum === 3) {
-      makeDot(25, 25, elementID);
-      makeDot(75, 75, elementID);
-      makeDot(50, 50, elementID);
+      makeDot(15, 15, elementID);
+      makeDot(65, 65, elementID);
+      makeDot(40, 40, elementID);
     } else if (randomNum === 4) {
-      makeDot(75, 75, elementID);
-      makeDot(25, 25, elementID);
-      makeDot(25, 75, elementID);
-      makeDot(75, 25, elementID);
+      makeDot(65, 65, elementID);
+      makeDot(15, 15, elementID);
+      makeDot(15, 65, elementID);
+      makeDot(65, 15, elementID);
     } else if (randomNum === 5) {
-      makeDot(50, 50, elementID);
-      makeDot(75, 75, elementID);
-      makeDot(25, 25, elementID);
-      makeDot(25, 75, elementID);
-      makeDot(75, 25, elementID);
+      makeDot(40, 40, elementID);
+      makeDot(65, 65, elementID);
+      makeDot(15, 15, elementID);
+      makeDot(15, 65, elementID);
+      makeDot(65, 15, elementID);
     } else if (randomNum === 6) {
-      makeDot(25, 75, elementID);
-      makeDot(50, 75, elementID);
-      makeDot(75, 75, elementID);
-      makeDot(25, 25, elementID);
-      makeDot(50, 25, elementID);
-      makeDot(75, 25, elementID);
+      makeDot(15, 65, elementID);
+      makeDot(40, 65, elementID);
+      makeDot(65, 65, elementID);
+      makeDot(15, 15, elementID);
+      makeDot(40, 15, elementID);
+      makeDot(65, 15, elementID);
     }
   }
 

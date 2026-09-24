@@ -11,13 +11,11 @@ $(document).ready(function () {
   var boardHeight = $($board).height();
   var ghosts = [];
   var ghostRadius = 10;
-  var ghostWidth = $(".ghost").css("width");
-  var ghostHeight = $(".ghost").css("height");
-  let integerWidth = parseInt(ghostWidth, 10);
-  let integerHeight = parseInt(ghostHeight, 10);
+  var ghostWidth = 50;
+  var ghostHeight = 50;
   // modify these values if you want faster moving ghosts or a shorter countdown timer
   const FPS = 25;
-  const initialDelay = 5000;
+  const initialDelay = 1000;
 
   //////////
   // startup
@@ -52,10 +50,10 @@ $(document).ready(function () {
 
     // this gives the ghost object all of the data that it needs to store
     ghost.id = "#" + id;
-    ghost.x = Math.random() * maxX + ghostRadius;
-    ghost.y = Math.random() * maxY + ghostRadius;
-    ghost.rightX = ghost.x + integerWidth;
-    ghost.bottomY = ghost.y + integerHeight;
+    ghost.x = Math.random() * maxX + ghostRadius < boardWidth;
+    ghost.y = Math.random() * maxY + ghostRadius < boardHeight;
+    ghost.rightX = ghost.x + ghostWidth;
+    ghost.bottomY = ghost.y + ghostHeight;
     ghost.speedX = decideSpeed();
     ghost.speedY = decideSpeed();
 
@@ -95,6 +93,8 @@ $(document).ready(function () {
       .attr("src", "img/ghost.png")
       .css("left", ghost.x)
       .css("top", ghost.y)
+      .css("right", ghost.rightX)
+      .css("bottom", ghost.bottomY)
       .addClass("ghost");
 
     // this inserts the ghost's HTML into your website
@@ -135,25 +135,23 @@ $(document).ready(function () {
   function moveGhost(ghost) {
     ghost.x += ghost.speedX;
     ghost.y += ghost.speedY;
-    ghost.rightX -= ghost.speedX;
-    ghost.bottomY -= ghost.speedY;
+    ghost.rightX += ghost.speedX;
+    ghost.bottomY += ghost.speedY;
   }
 
   // this bounces ghosts if they hit a wall
   function bounceGhost(ghost) {
-    // this bounces off the left wall
-    if (ghost.x < 0 || ghost.rightX >= boardWidth) {
+    // this bounces off the left or right wall
+    if (ghost.x < 0 || ghost.rightX > boardWidth) {
       ghost.x -= ghost.speedX;
+      //ghost.rightX -= ghost.speedX;
       ghost.speedX *= -1;
-      ghost.rightX += ghost.speedX;
-      ghost.speedX *= 1;
     }
-    // this bounces off the top wall
-    if (ghost.y < 0 || ghost.bottomY >= boardHeight) {
+    // this bounces off the top or bottom wall
+    if (ghost.y < 0 || ghost.bottomY > boardHeight) {
       ghost.y -= ghost.speedY;
+      //ghost.bottomY -= ghost.speedY;
       ghost.speedY *= -1;
-      ghost.bottomY += ghost.speedY;
-      ghost.speedY *= 1;
     }
   }
 
@@ -164,6 +162,7 @@ $(document).ready(function () {
     $(ghost.id).css("top", ghost.y);
     $(ghost.id).css("right", ghost.rightX);
     $(ghost.id).css("bottom", ghost.bottomY);
+
 
     // these lines add a glow around the ghost
     $(ghost.id).css(
