@@ -11,7 +11,9 @@ $(document).ready(function () {
   var boardHeight = $($board).height();
   var ghosts = [];
   var ghostRadius = 10;
+  //width is hard coded. Manually modify if CSS changes
   var ghostWidth = 50;
+  //height is hard coded. Manually modify if CSS changes
   var ghostHeight = 50;
   // modify these values if you want faster moving ghosts or a shorter countdown timer
   const FPS = 25;
@@ -27,6 +29,7 @@ $(document).ready(function () {
     var newId = getId(i);
     var newGhost = makeGhost(newId);
     ghosts.push(newGhost);
+
     addNewGhostElement(newGhost, newId);
   }
 
@@ -45,13 +48,13 @@ $(document).ready(function () {
     var ghost = {};
 
     // this creates some useful variables that are not directly placed in the object
-    var maxX = boardWidth - ghostRadius * 2;
-    var maxY = boardHeight - ghostRadius * 2;
+    var maxX = boardWidth - ghostWidth;
+    var maxY = boardHeight - ghostHeight;
 
     // this gives the ghost object all of the data that it needs to store
     ghost.id = "#" + id;
-    ghost.x = Math.random() * maxX + ghostRadius < boardWidth;
-    ghost.y = Math.random() * maxY + ghostRadius < boardHeight;
+    ghost.x = Math.random() * maxX;
+    ghost.y = Math.random() * maxY;
     ghost.rightX = ghost.x + ghostWidth;
     ghost.bottomY = ghost.y + ghostHeight;
     ghost.speedX = decideSpeed();
@@ -160,9 +163,8 @@ $(document).ready(function () {
     // these lines redraw the ghost's position
     $(ghost.id).css("left", ghost.x);
     $(ghost.id).css("top", ghost.y);
-    $(ghost.id).css("right", ghost.rightX);
-    $(ghost.id).css("bottom", ghost.bottomY);
-
+    // delete later? $(ghost.id).css("right", ghost.rightX);
+    // delete later? $(ghost.id).css("bottom", ghost.bottomY);
 
     // these lines add a glow around the ghost
     $(ghost.id).css(
