@@ -17,6 +17,12 @@ function runProgram(){
     RIGHT: 39,
     DOWN: 40
   }
+  var walker = {
+    x: 0,
+    y: 0,
+    speedX: 0,
+    speedY: 0
+  }
   // Game Item Objects
 
 
