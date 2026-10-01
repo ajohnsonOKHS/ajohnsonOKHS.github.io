@@ -10,21 +10,31 @@ function runProgram() {
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+  var boardWidth = parseInt($("#board").width());
+  var boardHeight = parseInt($("#board").height());
+  // Game Item Objects
   const KEY = {
     ENTER: 13,
     LEFT: 37,
     UP: 38,
     RIGHT: 39,
-    DOWN: 40,
+    DOWN: 40
   };
   var walker = {
     x: 0,
     y: 0,
+    width: parseInt($("#walker").width()),
+    height: parseInt($("#walker").height()),
     speedX: 0,
     speedY: 0
   };
-  // Game Item Objects
-
+  //helpful variable that need to be declared after the objects
+  // Variables that find the right and bottom of the walker
+  var walkerRightSide = walker.x + walker.width;
+  var walkerBottom = walker.y + walker.height;
+  // Varialbes that find the max x and max y of the border
+  var maxX = boardWidth - walker.x;
+  var maxY = boardHeight - walker.y;
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL); // execute newFrame every 0.0166 seconds (60 Frames per second)
 
@@ -47,6 +57,7 @@ function runProgram() {
   */
   function newFrame() {
     repositionGameItem();
+    wallCollision();
     redrawGameItem();
   }
 
@@ -56,6 +67,7 @@ function runProgram() {
   
   Note: You can have multiple event handlers for different types of events.
   */
+ // This function changes the walkers speed based on what arrow key is pressed
   function handleKeyDown(event) {
     if (event.which === KEY.LEFT) {
       walker.speedX = -5;
@@ -75,10 +87,11 @@ function runProgram() {
     }
     console.log(event.which);
   }
+  // This function makes the walker stop moving when any arrow key in released
   function handleKeyUp(event) {
     if (event.which === KEY.LEFT) {
       walker.speedX = 0;
-    } 
+    }
     if (event.which === KEY.UP) {
       walker.speedY = 0;
     }
@@ -93,15 +106,29 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-
+  //This function repositions the walker based on its speed
   function repositionGameItem() {
     walker.x += walker.speedX;
     walker.y += walker.speedY;
+    walkerRightSide += walker.speedX;
+    walkerBottom += walker.speedY;
   }
+  //This function redraws the walker on the screen using its css values
   function redrawGameItem() {
     $("#walker").css("left", walker.x);
     $("#walker").css("top", walker.y);
   }
+  /* This function checks if the walker hits the border of the screen
+     and changes its speed if it does */
+  function wallCollision() {
+    if (walker.x < 0 || walkerRightSide > maxX) {
+      walker.x -= walker.speedX;
+    }
+    if (walker.y < 0 || walkerBottom > maxY) {
+      walker.y -= walker.speedY;
+    }
+  }
+  // This function ends the game
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
