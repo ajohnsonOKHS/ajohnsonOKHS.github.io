@@ -13,6 +13,7 @@ function runProgram() {
   var boardWidth = parseInt($("#board").width());
   var boardHeight = parseInt($("#board").height());
   // Game Item Objects
+  // This object holds all the key values so that they are not magic numbers
   const KEY = {
     ENTER: 13,
     LEFT: 37,
@@ -20,6 +21,7 @@ function runProgram() {
     RIGHT: 39,
     DOWN: 40
   };
+  // This object holds vital information about the walker 
   var walker = {
     x: 0,
     y: 0,
@@ -28,16 +30,17 @@ function runProgram() {
     speedX: 0,
     speedY: 0
   };
-  //helpful variable that need to be declared after the objects
-  // Variables that find the right and bottom of the walker
-  var walkerRightSide = walker.x + walker.width;
-  var walkerBottom = walker.y + walker.height;
-  // Varialbes that find the max x and max y of the border
-  var maxX = boardWidth - walker.x;
-  var maxY = boardHeight - walker.y;
+  
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL); // execute newFrame every 0.0166 seconds (60 Frames per second)
 
+  //helpful variable that need to be declared after the objects
+  //Variables that find the right and bottom of the walker
+  walker.rightSide = walker.x + walker.width;
+  walker.bottom = walker.y + walker.height;
+  //Variables that find the max x and max y of the border
+  //var maxX = boardWidth - walker.x;
+  //var maxY = boardHeight - walker.y;
   /* 
   This section is where you set up event listeners for user input.
   For example, if you wanted to handle a click event on the document, you would replace 'eventType' with 'click', and if you wanted to execute a function named 'handleClick', you would replace 'handleEvent' with 'handleClick'.
@@ -57,7 +60,9 @@ function runProgram() {
   */
   function newFrame() {
     repositionGameItem();
+
     wallCollision();
+
     redrawGameItem();
   }
 
@@ -71,34 +76,24 @@ function runProgram() {
   function handleKeyDown(event) {
     if (event.which === KEY.LEFT) {
       walker.speedX = -5;
-      console.log("left pressed");
     }
     if (event.which === KEY.UP) {
       walker.speedY = -5;
-      console.log("up pressed");
     }
     if (event.which === KEY.RIGHT) {
       walker.speedX = 5;
-      console.log("right pressed");
     }
     if (event.which === KEY.DOWN) {
       walker.speedY = 5;
-      console.log("down pressed");
     }
     console.log(event.which);
   }
   // This function makes the walker stop moving when any arrow key in released
   function handleKeyUp(event) {
-    if (event.which === KEY.LEFT) {
+    if (event.which === KEY.LEFT || event.which === KEY.RIGHT) {
       walker.speedX = 0;
     }
-    if (event.which === KEY.UP) {
-      walker.speedY = 0;
-    }
-    if (event.which === KEY.RIGHT) {
-      walker.speedX = 0;
-    }
-    if (event.which === KEY.DOWN) {
+    if (event.which === KEY.UP || event.which === KEY.DOWN) {
       walker.speedY = 0;
     }
   }
@@ -106,28 +101,6 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-  //This function repositions the walker based on its speed
-  function repositionGameItem() {
-    walker.x += walker.speedX;
-    walker.y += walker.speedY;
-    walkerRightSide += walker.speedX;
-    walkerBottom += walker.speedY;
-  }
-  //This function redraws the walker on the screen using its css values
-  function redrawGameItem() {
-    $("#walker").css("left", walker.x);
-    $("#walker").css("top", walker.y);
-  }
-  /* This function checks if the walker hits the border of the screen
-     and changes its speed if it does */
-  function wallCollision() {
-    if (walker.x < 0 || walkerRightSide > maxX) {
-      walker.x -= walker.speedX;
-    }
-    if (walker.y < 0 || walkerBottom > maxY) {
-      walker.y -= walker.speedY;
-    }
-  }
   // This function ends the game
   function endGame() {
     // stop the interval timer
@@ -136,4 +109,29 @@ function runProgram() {
     // turn off event handlers
     $(document).off();
   }
+  //This function repositions the walker based on its speed
+  function repositionGameItem() {
+    walker.x += walker.speedX;
+    walker.y += walker.speedY;
+    walker.rightSide += walker.speedX;
+    walker.bottom += walker.speedY;
+  }
+  //This function redraws the walker on the screen using its css values
+  function redrawGameItem() {
+    $("#walker").css("left", walker.x);
+    $("#walker").css("top", walker.y);
+    $("#walker").css("right", walker.rightSide);
+    $("#walker").css("bottom", walker.bottom);
+  }
+  /* This function checks if the walker hits the border of the screen
+     and changes its speed if it does */
+  function wallCollision() {
+    if (walker.x < 0 || walker.rightSide > boardWidth) {
+      walker.x -= walker.speedX;
+    }
+    if (walker.y < 0 || walker.bottom > boardHeight) {
+      walker.y -= walker.speedY;
+    }
+  }
+  
 }
