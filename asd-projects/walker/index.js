@@ -1,8 +1,8 @@
 /* global $, sessionStorage */
 
 $(document).ready(runProgram); // wait for the HTML / CSS elements of the page to fully load, then execute runProgram()
-  
-function runProgram(){
+
+function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   //////////////////////////// SETUP /////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -15,19 +15,18 @@ function runProgram(){
     LEFT: 37,
     UP: 38,
     RIGHT: 39,
-    DOWN: 40
-  }
+    DOWN: 40,
+  };
   var walker = {
     x: 0,
     y: 0,
     speedX: 0,
     speedY: 0
-  }
+  };
   // Game Item Objects
 
-
   // one-time setup
-  var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
+  var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL); // execute newFrame every 0.0166 seconds (60 Frames per second)
 
   /* 
   This section is where you set up event listeners for user input.
@@ -35,7 +34,7 @@ function runProgram(){
 
   Note: You can have multiple event listeners for different types of events.
   */
-  $(document).on('keydown', handleKeyDown);                          
+  $(document).on("keydown", handleKeyDown);
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -46,10 +45,10 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
-
+    repositionGameItem();
+    redrawGameItem();
   }
-  
+
   /* 
   This section is where you set up the event handlers for user input.
   For example, if you wanted to make an event handler for a click event, you should rename this function to 'handleClick', then write the code that should execute when the click event occurs.
@@ -76,7 +75,14 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  
+  function repositionGameItem() {
+    walker.x += walker.speedX;
+    walker.y += walker.speedY;
+  }
+  function redrawGameItem() {
+    $("#walker").css("left", walker.x);
+    $("#walker").css("top", walker.y);
+  }
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
@@ -84,5 +90,4 @@ function runProgram(){
     // turn off event handlers
     $(document).off();
   }
-  
 }
