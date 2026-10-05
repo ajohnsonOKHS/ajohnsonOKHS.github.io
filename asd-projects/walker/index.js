@@ -10,10 +10,13 @@ function runProgram() {
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  var boardWidth = parseInt($("#board").width());
-  var boardHeight = parseInt($("#board").height());
+  var leftBorder = 0;
+  var topBorder = 0;
+  var rightBorder = parseInt($("#board").width());
+  var bottomBorder = parseInt($("#board").height());
+
   // Game Item Objects
-  // This object holds all the key values so that they are not magic numbers
+  // This object holds all the keyboard values so that they are not magic numbers
   const KEY = {
     ENTER: 13,
     LEFT: 37,
@@ -34,13 +37,10 @@ function runProgram() {
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL); // execute newFrame every 0.0166 seconds (60 Frames per second)
 
-  //helpful variable that need to be declared after the objects
-  //Variables that find the right and bottom of the walker
+  //Variables that find the right and bottom sides of the walker - need to be declared after object
   walker.rightSide = walker.x + walker.width;
   walker.bottom = walker.y + walker.height;
-  //Variables that find the max x and max y of the border
-  //var maxX = boardWidth - walker.x;
-  //var maxY = boardHeight - walker.y;
+  
   /* 
   This section is where you set up event listeners for user input.
   For example, if you wanted to handle a click event on the document, you would replace 'eventType' with 'click', and if you wanted to execute a function named 'handleClick', you would replace 'handleEvent' with 'handleClick'.
@@ -126,12 +126,11 @@ function runProgram() {
   /* This function checks if the walker hits the border of the screen
      and changes its speed if it does */
   function wallCollision() {
-    if (walker.x < 0 || walker.rightSide > boardWidth) {
+    if (walker.x < leftBorder || walker.rightSide > rightBorder) {
       walker.x -= walker.speedX;
     }
-    if (walker.y < 0 || walker.bottom > boardHeight) {
+    if (walker.y < topBorder || walker.bottom > bottomBorder) {
       walker.y -= walker.speedY;
     }
   }
-  
 }
