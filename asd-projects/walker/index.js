@@ -1,7 +1,7 @@
 /* global $, sessionStorage */
 
 $(document).ready(runProgram); // wait for the HTML / CSS elements of the page to fully load, then execute runProgram()
-
+//When called, this executes everything inside and makes the program run/work
 function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   //////////////////////////// SETUP /////////////////////////////////////////////
@@ -10,13 +10,15 @@ function runProgram() {
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+  //Hard coded from TODO 9 - put in variable so they are not magic numbers
   var leftBorder = 0;
   var topBorder = 0;
+  //Made a number from the CSS values width and height 
   var rightBorder = parseInt($("#board").width());
   var bottomBorder = parseInt($("#board").height());
 
   // Game Item Objects
-  // This object holds all the keyboard values so that they are not magic numbers
+  // This object holds all the needed keyboard values so that they are not magic numbers
   const KEY = {
     ENTER: 13,
     LEFT: 37,
@@ -28,8 +30,8 @@ function runProgram() {
   var walker = {
     x: 0,
     y: 0,
-    width: parseInt($("#walker").width()),
-    height: parseInt($("#walker").height()),
+    width: $("#walker").width(),
+    height: $("#walker").height(),
     speedX: 0,
     speedY: 0
   };
@@ -47,7 +49,9 @@ function runProgram() {
 
   Note: You can have multiple event listeners for different types of events.
   */
+  // This makes it known to the program when a key on the keyboard is pushed down
   $(document).on("keydown", handleKeyDown);
+  //This makes it known to the program when a key o nthe keyboard is released
   $(document).on("keyup", handleKeyUp);
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -76,15 +80,19 @@ function runProgram() {
   function handleKeyDown(event) {
     if (event.which === KEY.LEFT) {
       walker.speedX = -5;
+      console.log("left pressed");
     }
     if (event.which === KEY.UP) {
       walker.speedY = -5;
+      console.log("up pressed");
     }
     if (event.which === KEY.RIGHT) {
       walker.speedX = 5;
+      console.log("right pressed");
     }
     if (event.which === KEY.DOWN) {
       walker.speedY = 5;
+      console.log("down pressed");
     }
     console.log(event.which);
   }
@@ -113,15 +121,13 @@ function runProgram() {
   function repositionGameItem() {
     walker.x += walker.speedX;
     walker.y += walker.speedY;
-    walker.rightSide += walker.speedX;
-    walker.bottom += walker.speedY;
+    walker.rightSide = walker.x + walker.width;
+    walker.bottom = walker.y + walker.height;
   }
   //This function redraws the walker on the screen using its css values
   function redrawGameItem() {
     $("#walker").css("left", walker.x);
     $("#walker").css("top", walker.y);
-    $("#walker").css("right", walker.rightSide);
-    $("#walker").css("bottom", walker.bottom);
   }
   /* This function checks if the walker hits the border of the screen
      and changes its speed if it does */
