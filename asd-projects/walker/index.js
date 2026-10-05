@@ -14,8 +14,8 @@ function runProgram() {
   var leftBorder = 0;
   var topBorder = 0;
   //Made a number from the CSS values width and height 
-  var rightBorder = parseInt($("#board").width());
-  var bottomBorder = parseInt($("#board").height());
+  var rightBorder = $("#board").width();
+  var bottomBorder = $("#board").height();
 
   // Game Item Objects
   // This object holds all the needed keyboard values so that they are not magic numbers
@@ -26,6 +26,13 @@ function runProgram() {
     RIGHT: 39,
     DOWN: 40
   };
+  // This object holds all the needed keyboard values for the second walker
+  const KEY2 = {
+    W: 87,
+    A: 65,
+    S: 83,
+    D: 68
+  };
   // This object holds vital information about the walker 
   var walker = {
     x: 0,
@@ -35,13 +42,24 @@ function runProgram() {
     speedX: 0,
     speedY: 0
   };
+  // This object holds vital information about the second walker(pink)
+  var walker2 = {
+    x: 0,
+    y: 0,
+    width: $("#walker2").width(),
+    height: $("#walker2").height(),
+    speedX: 0,
+    speedY: 0
+  };
   
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL); // execute newFrame every 0.0166 seconds (60 Frames per second)
 
-  //Variables that find the right and bottom sides of the walker - need to be declared after object
+  //Variables that find the right and bottom sides of each walker - need to be declared after object
   walker.rightSide = walker.x + walker.width;
-  walker.bottom = walker.y + walker.height;
+  walker.bottom = walker.y + walker.height; 
+  walker2.rightSide = walker2.x + walker2.width;
+  walker2.bottom = walker2.y + walker2.height;
   
   /* 
   This section is where you set up event listeners for user input.
@@ -94,6 +112,22 @@ function runProgram() {
       walker.speedY = 5;
       console.log("down pressed");
     }
+    if (event.which === KEY2.W) {
+      walker2.speedX = -5;
+      console.log("W pressed");
+    }
+    if (event.which === KEY2.A) {
+      walker2.speedX = -5;
+      console.log("A pressed");
+    }
+    if (event.which === KEY2.S) {
+      walker2.speedY = 5;
+      console.log("S pressed");
+    }
+    if (event.which === KEY2.D) {
+      walker2.speedY = 5;
+      console.log("D pressed");
+    }
     console.log(event.which);
   }
   // This function makes the walker stop moving when any arrow key in released
@@ -103,6 +137,12 @@ function runProgram() {
     }
     if (event.which === KEY.UP || event.which === KEY.DOWN) {
       walker.speedY = 0;
+    }
+    if (event.which === KEY.W || event.which === KEY.S) {
+      walker2.speedY = 0;
+    }
+    if (event.which === KEY.A || event.which === KEY.D) {
+      walker2.speedX = 0;
     }
   }
 
@@ -123,11 +163,17 @@ function runProgram() {
     walker.y += walker.speedY;
     walker.rightSide = walker.x + walker.width;
     walker.bottom = walker.y + walker.height;
+    walker2.x += walker2.speedX;
+    walker2.y += walker2.speedY;
+    walker2.rightSide = walker2.x + walker2.width;
+    walker2.bottom = walker2.y + walker2.height;
   }
   //This function redraws the walker on the screen using its css values
   function redrawGameItem() {
     $("#walker").css("left", walker.x);
     $("#walker").css("top", walker.y);
+    $("#walker2").css("top", walker2.y);
+    $("#walker2").css("left", walker2.x);
   }
   /* This function checks if the walker hits the border of the screen
      and changes its speed if it does */
@@ -137,6 +183,12 @@ function runProgram() {
     }
     if (walker.y < topBorder || walker.bottom > bottomBorder) {
       walker.y -= walker.speedY;
+    }
+    if (walker2.y < topBorder || walker2.bottom > bottomBorder) {
+      walker2.y -= walker2.speedY;
+    }
+    if (walker2.x < leftBorder || walker2.rightSide > rightBorder) {
+      walker2.x -= walker2.speedX;
     }
   }
 }
