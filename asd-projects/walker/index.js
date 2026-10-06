@@ -24,15 +24,13 @@ function runProgram() {
     LEFT: 37,
     UP: 38,
     RIGHT: 39,
-    DOWN: 40
-  };
-  // This object holds all the needed keyboard values for the second walker
-  const KEY2 = {
+    DOWN: 40,
     W: 87,
     A: 65,
     S: 83,
     D: 68
   };
+ 
   // This object holds vital information about the walker 
   var walker = {
     x: 0,
@@ -112,19 +110,19 @@ function runProgram() {
       walker.speedY = 5;
       console.log("down pressed");
     }
-    if (event.which === KEY2.W) {
+    if (event.which === KEY.A) {
       walker2.speedX = -5;
       console.log("W pressed");
     }
-    if (event.which === KEY2.A) {
-      walker2.speedX = -5;
+    if (event.which === KEY.W) {
+      walker2.speedY = -5;
       console.log("A pressed");
     }
-    if (event.which === KEY2.S) {
-      walker2.speedY = 5;
+    if (event.which === KEY.D) {
+      walker2.speedX = 5;
       console.log("S pressed");
     }
-    if (event.which === KEY2.D) {
+    if (event.which === KEY.S) {
       walker2.speedY = 5;
       console.log("D pressed");
     }
@@ -172,8 +170,8 @@ function runProgram() {
   function redrawGameItem() {
     $("#walker").css("left", walker.x);
     $("#walker").css("top", walker.y);
-    $("#walker2").css("top", walker2.y);
     $("#walker2").css("left", walker2.x);
+    $("#walker2").css("top", walker2.y);
   }
   /* This function checks if the walker hits the border of the screen
      and changes its speed if it does */
@@ -184,11 +182,11 @@ function runProgram() {
     if (walker.y < topBorder || walker.bottom > bottomBorder) {
       walker.y -= walker.speedY;
     }
-    if (walker2.y < topBorder || walker2.bottom > bottomBorder) {
-      walker2.y -= walker2.speedY;
-    }
     if (walker2.x < leftBorder || walker2.rightSide > rightBorder) {
       walker2.x -= walker2.speedX;
+    }
+    if (walker2.y < topBorder || walker2.bottom > bottomBorder) {
+      walker2.y -= walker2.speedY;
     }
   }
 }
