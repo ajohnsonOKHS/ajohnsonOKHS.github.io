@@ -112,19 +112,19 @@ function runProgram() {
     }
     if (event.which === KEY.A) {
       walker2.speedX = -5;
-      console.log("W pressed");
+      console.log("A pressed");
     }
     if (event.which === KEY.W) {
       walker2.speedY = -5;
-      console.log("A pressed");
+      console.log("W pressed");
     }
     if (event.which === KEY.D) {
       walker2.speedX = 5;
-      console.log("S pressed");
+      console.log("D pressed");
     }
     if (event.which === KEY.S) {
       walker2.speedY = 5;
-      console.log("D pressed");
+      console.log("S pressed");
     }
     console.log(event.which);
   }
