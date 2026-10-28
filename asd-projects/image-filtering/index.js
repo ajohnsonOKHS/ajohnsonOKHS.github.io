@@ -98,7 +98,9 @@ function decreaseBlue(pixelArr) {
   pixelArr[BLUE] -= 50;
   pixelArr[BLUE] = keepInBounds(pixelArr[BLUE]);
 }
-//This function gives the image a green tint within rgb values
+/*This function takes the green component of every rgb value/pixel in the image array(image.js) 
+  and increases it by the value of that pixels blue component
+*/
 function increaseGreenByBlue(pixelArr) {
   var diffGreen = pixelArr[GREEN] + pixelArr[BLUE];
   pixelArr[GREEN] = keepInBounds(diffGreen);
